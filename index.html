@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!--Icon-->
+
+    <link rel="icon" href="img/icontemp.png">
+    
+    <title>Placar</title>
+     
+    <!--Box Icons-->
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!--CSS-->
+    
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    
+
+</head>
+<body>
+
+ <!--Timer: font-->
+
+        <style>
+                @font-face{
+                    font-family:'alarm_clockregular';
+                    src: url('fonts/alarm-clock-webfont.woff2') format('woff2'),
+                         url('fonts/alarm-clock-webfont.woff2') format('woff');
+                    font-weight: normal;
+                    font-style: normal;
+                
+                }
+                
+                
+                
+                .tempo{
+                    font-size: 93px;
+                    font-family: 'alarm_clockregular';
+                    color: yellow;
+                }
+        </style>
+    
+
+
+
+
+<!--Timer: principal-->
+       
+
+        <div class="container text-center">
+                <section style="background-color: black; border-radius: 20px;">
+                        <div class="row">
+
+
+                                <!--Timer: buttons-->
+
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+
+                                        
+
+                                        <button id="start" type="button" class="btn btn-light"><i class='bx bx-play-circle' style='font-size: 30px;' ></i></button>
+<br>
+                                        <button id="restart" onclick="restart();" type="button" class="btn btn-light"><i class='bx bx-reset' style='font-size: 30px;' ></i></button>
+<br>
+                                        <button id="pauseResume" type="button" class="btn btn-light"><i id="iconPauseResume" class='bx bx-pause' style="font-size: 30px;"></i></button>
+
+                                </div>
+
+                                <!--Timer: view-->
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+
+                        <label id="timer" class="tempo" style="margin-top: 30px;">00:00</label>
+
+                                </div>
+                           
+                                <!--Timer: select-->
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" style="margin-top: 20px;">
+
+                                        
+                                        <label for="minute"><h9>Minutos:</h9></label> <br>
+                                        <input type="number" name="" id="minute" value="00" max="59" min="0">
+<br><br>
+
+                                        <label for="second"><h9>Segundos:</h9></label> <br>
+                                        <input type="number" name="" id="second" value="00" max="59" min="0">
+
+                                </div>
+                        
+                                
+                        </div>
+                </section>
+        </div>
+
+<br>
+
+
+
+
+
+        <div class="container text-center">
+                <div class="row">
+
+                    <!-- Atleta 1 -->
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 col-sem-margem">
+                        <div class="atleta1">
+
+                                <div class="mb-3">
+                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Atleta">
+                                      </div>
+                                      
+                                      
+        
+                                      <p4> Montada | Pegada nas Costa</p4>
+                                      <br>
+                                             
+                                              <label id="pmont" class="pontos">0</label>
+
+                                              <br>
+                                              
+
+                                              <button id="amont" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              ">+</button>
+
+                                              <button id="dmont" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              ">-</button>
+                                      
+                                         
+                                      <br>       
+                                              <hr>
+                                      
+                                              <p4> Passagem de Guarda</p4>
+                                      <br>
+                                              
+                                              <label id="ppass" class="pontos">0</label>
+
+                                      <br>
+
+                                              <button id="apass" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              ">+</button>
+
+                                      
+                                              <button id="dpass" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              ">-</button>
+                                      <br>        
+                                              <hr/>
+        
+                                              <p4> Queda | Raspagem | Joelho na Barriga</p4>
+                                      <br>
+                                              
+                                              <label id="pras" class="pontos">0</label>
+
+                                      <br>
+
+                                              <button id="aras" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              margin-bottom: 4px;
+                                              ">+</button>
+                                      
+                                              <button id="dras" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              margin-bottom: 4px;
+                                              ">-</button>    
+                                      <br>        
+                                              
+                                                      
+                                </div>
+                    </div>
+            
+
+
+        <!--Atleta 1/Placar 1-->
+
+                    <div class="col-lg-2 col-md-6 col-sm-12 mb-4 col-sem-margem">
+                        <div class="align-self-start" 
+                        style=
+                        "background-color: rgb(32, 32, 32);
+                        color: white;
+                        border-top: 20px;
+                        border-right: 4px solid black;
+                        border-top: 4px solid black;
+                        border-bottom: 4px solid black;">
+
+                       
+                    
+                        <p4> Vantagem </p4>
+                     <br>
+                        
+                        <label id="pvan" class="pontos">0</label>
+
+                     <br>
+
+                        <button id="avan" type="button" class="btn btn-primary btn-lg" 
+                        style="
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        ">+</button>
+                              
+                        <button id="dvan" type="button" class="btn btn-danger btn-lg" 
+                        style="
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        ">-</button>    
+                    
+
+                </div>
+
+
+                <div class="align-self-center" 
+                style=
+                "background-color: white;
+                border-left: 4px solid black;
+                border-right: 4px solid black;
+                border-top: 4px solid black;
+                border-bottom: 4px solid black;">      
+
+<br><br><br><br>
+                        <label id="pont1" class="pontos">0</label>
+<br><br><br><br>
+
+                </div>        
+
+        
+             
+
+
+
+                <div class="align-self-end" 
+                style=
+                "background-color: rgb(32, 32, 32);
+                color: white;
+                border-right: 4px solid black;
+                border-top: 4px solid black;
+                border-bottom: 4px solid black;
+                ">
+
+                     
+                        <p4> Punição </p4>
+                     <br>
+                       
+                        <label id="ppun" class="pontos">0</label>
+
+                     <br>
+
+                        <button id="apun" type="button" class="btn btn-primary btn-lg" 
+                        style="
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        margin-top: 16px;
+                        ">+</button>
+                              
+                        <button id="dpun" type="button" class="btn btn-danger btn-lg" 
+                        style="
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        margin-top: 16px;
+                        margin-bottom: 4px;
+                        ">-</button>    
+                    
+
+                </div>
+                    </div>
+            
+<!--Atleta 2/Placar 2-->
+
+                    <div class="col-lg-2 col-md-6 col-sm-12 mb-4 col-sem-margem" style="height: 100%;">
+                        <div class="align-self-start" 
+                style=
+                "background-color: rgb(218, 19, 19);
+                color: white;
+                border-left: 4px solid black;
+                border-top: 4px solid black;
+                border-bottom: 4px solid black;">
+
+                        <p4> Vantagem </p4>
+                    <br>
+                        
+                        <label id="pvan2" class="pontos">0</label>
+
+                    <br>
+
+                        <button id="avan2" type="button" class="btn btn-primary btn-lg" 
+                        style="
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        ">+</button>
+                              
+                        <button id="dvan2" type="button" class="btn btn-danger btn-lg" 
+                        style="
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        ">-</button>    
+        
+                </div>
+
+
+
+                <div class="align-self-center"
+                style=
+                "background-color: white;
+                border-left: 4px solid black;
+                border-top: 4px solid black;
+                border-bottom: 4px solid black;
+                border-right: 4px solid black;">      
+
+<br><br><br><br>
+                        <label id="pont2" class="pontos">0</label>
+<br><br><br><br>
+
+                </div>    
+                
+
+                  
+                <div class="align-self-end" 
+                style=
+                "background-color: rgb(218, 19, 19);
+                color: white;
+                border-left: 4px solid black;
+                border-top: 4px solid black;
+                border-bottom: 4px solid black;">
+
+                        <p4> Punição </p4>
+                    <br>
+                       
+                        <label id="ppun2" class="pontos">0</label>
+
+                    <br>
+
+                        <button id="apun2" type="button" class="btn btn-primary btn-lg" 
+                        style="
+                        margin-right: 4px;
+                        margin-bottom: 4px;
+                        margin-top: 16px;
+                        ">+</button>
+                              
+                        <button id="dpun2" type="button" class="btn btn-danger btn-lg" 
+                        style="
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        margin-top: 16px;
+                        margin-bottom: 4px;
+                        ">-</button>    
+
+                </div>
+                    </div>
+            
+                    <!-- Atleta 2 -->
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 col-sem-margem">
+                        <div class="atleta2">
+
+                                <div class="mb-3">
+                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Atleta">
+                                      </div>
+        
+                                      <p4> Montada | Pegada nas Costa</p4>
+                                      <br>
+                                              
+                                              <label id="pmont2" class="pontos">0</label>
+
+                                      <br>
+
+                                              <button id="amont2" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              ">+</button>
+                                              
+                                              <button id="dmont2" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              ">-</button>
+                                      
+                                         
+                                      <br>       
+                                              <hr>
+                                      
+                                              <p4> Passagem de Guarda</p4>
+                                      <br>
+
+                                              <label id="ppass2" class="pontos">0</label>
+
+                                      <br>
+
+                                              <button id="apass2" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              ">+</button>
+                                      
+                                              <button id="dpass2" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              ">-</button>
+                                      <br>        
+                                              <hr/>
+        
+                                              <p4> Queda | Raspagem | Joelho na Barriga</p4>
+                                      <br>
+
+                                              <label id="pras2" class="pontos">0</label>
+
+                                      <br>
+
+                                              <button id="aras2" type="button" class="btn btn-primary btn-lg" 
+                                              style="
+                                              margin-right: 4px;
+                                              margin-bottom: 4px;
+                                              ">+</button>
+                                      
+                                              <button id="dras2" type="button" class="btn btn-danger btn-lg" 
+                                              style="
+                                              margin-left: 4px;
+                                              margin-right: 4px;
+                                              margin-bottom: 4px;
+                                              ">-</button>    
+                                      <br>        
+                                             
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+
+Desenvolvido por Pedro Henrique Teofilo Cunha
+
+<!--JavaScript-->
+
+    <script src="JavaScript\functions.js"></script>
+    <script src="JavaScript\bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+<!--Desenvolvido por Pedro Henrique Teofilo Cunha-->

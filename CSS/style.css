@@ -1,0 +1,103 @@
+body{
+    background-color: gray;
+
+}
+
+p4{
+    font-size: 20px;
+}
+
+
+.full-screen-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.atleta1{
+    font-size: 16px;
+    color: white;
+    background-color: rgb(32, 32, 32);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left: 4px solid black;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+}
+
+.atleta2{
+    font-size: 16px;
+    color: white;
+    background-color: rgb(218, 19, 19);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-right: 4px solid black;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+}
+
+
+.btn-danger{
+    background-color: white;
+    color: red;
+    font-size: 20px;
+}
+
+.btn-primary{
+    background-color: white;
+    color: blue;
+    font-size: 20px;
+}
+
+
+.pontos{
+    font-size: 128px;
+}
+
+.btn-light{
+    margin-top: 9px;
+}
+
+
+
+.form-control{
+    text-align: center;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.texto{
+    background-color: transparent;
+    color: white;
+}
+
+
+
+.col-sem-margem{
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+textarea{
+    background-color: transparent;
+    border: 0px;
+    height: 120px;
+}
+
+
+vp1{
+    color: white;
+}
+
+vp2{
+    color: white;
+}
+
+
+h9{
+    font-size: 18px;
+    color: white;
+}
+
