@@ -1,3 +1,5 @@
+//variáveis
+
 let countMont1 = 0;
 let countPass1 = 0;
 let countRas1 = 0;
@@ -195,6 +197,7 @@ const updateGlobalScore = () => {
     document.getElementById("pont1").innerHTML = scoreAtleta1;
     document.getElementById("pont2").innerHTML = scoreAtleta2;
 }
+
 
 
 
