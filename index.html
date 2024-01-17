@@ -56,40 +56,33 @@
                 <section style="background-color: black; border-radius: 20px;">
                         <div class="row">
 
-
-                                <!--Timer: buttons-->
-
-                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-
-                                        
-
-                                        <button id="start" type="button" class="btn btn-light"><i class='bx bx-play-circle' style='font-size: 30px;' ></i></button>
-<br>
-                                        <button id="restart" onclick="restart();" type="button" class="btn btn-light"><i class='bx bx-reset' style='font-size: 30px;' ></i></button>
-<br>
-                                        <button id="pauseResume" type="button" class="btn btn-light"><i id="iconPauseResume" class='bx bx-pause' style="font-size: 30px;"></i></button>
-
-                                </div>
-
-                                <!--Timer: view-->
-                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-
-                        <label id="timer" class="tempo" style="margin-top: 30px;">00:00</label>
-
-                                </div>
-                           
-                                <!--Timer: select-->
-                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" style="margin-top: 20px;">
-
-                                        
-                                        <label for="minute"><h9>Minutos:</h9></label> <br>
-                                        <input type="number" name="" id="minute" value="00" max="59" min="0">
-<br><br>
-
-                                        <label for="second"><h9>Segundos:</h9></label> <br>
-                                        <input type="number" name="" id="second" value="00" max="59" min="0">
-
-                                </div>
+<!-- Timer: buttons -->
+<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <button id="start" type="button" class="btn btn-light"><i class='bx bx-play-circle' style='font-size: 30px;'></i></button>
+        <br>
+        <button id="restart" onclick="restart();" type="button" class="btn btn-light"><i class='bx bx-reset' style='font-size: 30px;'></i></button>
+        <br>
+        <button id="pauseResume" type="button" class="btn btn-light"><i id="iconPauseResume" class='bx bx-pause' style="font-size: 30px;"></i></button>
+      </div>
+      
+      <!-- Timer: view -->
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <label id="timer" class="tempo" style="margin-top: 30px;">00:00</label>
+      </div>
+      
+      <!-- Timer: floating -->
+      <div id="timer-container" class="col-lg-4 col-md-6 col-sm-12 mb-4 fixed-left">
+        <label id="timer-floating" class="tempo" style="margin-top: 30px;">00:00</label>
+      </div>
+      
+      <!-- Timer: select -->
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4" style="margin-top: 20px;">
+        <label for="minute"><h9>Minutos:</h9></label> <br>
+        <input type="number" name="" id="minute" value="00" max="59" min="0">
+        <br><br>
+        <label for="second"><h9>Segundos:</h9></label> <br>
+        <input type="number" name="" id="second" value="00" max="59" min="0">
+      </div>
                         
                                 
                         </div>

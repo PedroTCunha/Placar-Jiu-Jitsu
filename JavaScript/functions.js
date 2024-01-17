@@ -204,88 +204,130 @@ const updateGlobalScore = () => {
 
 //Timer
 
-
-
 const btnStart = document.getElementById('start');
 const btnPauseResume = document.getElementById('pauseResume');
 const btnRestart = document.getElementById('restart');
-let interval;
+let intervalView;
+let intervalFloating;
 let duration;
-let remainingTime = 0;
-let isPaused = false;
-let display;
+let remainingTimeView = 0;
+let remainingTimeFloating = 0;
+let isPausedView = false;
+let isPausedFloating = false;
+let displayView;
+let displayFloating;
 
 btnStart.addEventListener('click', () => {
-    const minutes = document.getElementById('minute');
-    const seconds = document.getElementById('second');
+  const minutes = document.getElementById('minute');
+  const seconds = document.getElementById('second');
 
-    duration = (parseInt(minutes.value) * 60) + parseInt(seconds.value);
+  duration = (parseInt(minutes.value) * 60) + parseInt(seconds.value);
 
-    display = document.getElementById('timer');
-    timer(duration, display);
-    togglePauseResumeButton();
-    btnStart.disabled = true;
+  displayView = document.getElementById('timer');
+  displayFloating = document.getElementById('timer-floating');
+
+  startTimer('view', displayView, intervalView, remainingTimeView);
+  startTimer('floating', displayFloating, intervalFloating, remainingTimeFloating);
+
+  btnStart.disabled = true;
+  
+  togglePauseResumeButton('view');
+  togglePauseResumeButton('floating');
+
+ 
 });
 
 btnPauseResume.addEventListener('click', () => {
-    if (!isPaused) {
-        if (interval) {
-            clearInterval(interval);
-            isPaused = true;
-            togglePauseResumeButton();
-        }
-    } else {
-        if (remainingTime >= 0) {
-            timer(remainingTime, display);
-            isPaused = false;
-            togglePauseResumeButton();
-        }
-    }
+  togglePauseResume('view', displayView, intervalView, remainingTimeView, isPausedView);
+  togglePauseResume('floating', displayFloating, intervalFloating, remainingTimeFloating, isPausedFloating);
 });
 
-btnRestart.addEventListener('click', () => {
+function startTimer(timerType, display, remainingTime) {
+    let timerValue = remainingTime || duration;
+  
+    const interval = setInterval(() => {
+      let minutes = Math.floor(timerValue / 60);
+      let seconds = Math.floor(timerValue % 60);
+      updateDisplay(display, minutes, seconds);
+  
+      if ((timerType === 'view' && !isPausedView) || (timerType === 'floating' && !isPausedFloating)) {
+        timerValue -= 1;
+      }
+  
+      if (timerValue < 0) {
+        clearInterval(interval);
+        btnStart.disabled = false;
+      } else {
+        if (timerType === 'view') {
+          remainingTimeView = timerValue;
+        } else if (timerType === 'floating') {
+          remainingTimeFloating = timerValue;
+        }
+      }
+    }, 1000);
+  
+    return interval;  
+  }
+
+  btnRestart.addEventListener('click', () => {
     location.reload();
 });
-
-function togglePauseResumeButton() {
-    const iconPauseResume = document.getElementById('iconPauseResume');
-
+  
+  function togglePauseResume(timerType, display, interval, isPaused) {
     if (isPaused) {
-        
-        iconPauseResume.classList.remove('bx-pause');
-        iconPauseResume.classList.add('bx-play'); 
+      clearInterval(interval);
+      remainingTime = timerType === 'view' ? remainingTimeView : remainingTimeFloating;
+      updateDisplay(display, Math.floor(remainingTime / 60), Math.floor(remainingTime % 60));
+      if (timerType === 'view') {
+        intervalView = startTimer(timerType, display, remainingTime);
+      } else if (timerType === 'floating') {
+        intervalFloating = startTimer(timerType, display, remainingTime);
+      }
     } else {
-        
-        iconPauseResume.classList.remove('bx-play');
-        iconPauseResume.classList.add('bx-pause'); 
+      clearInterval(interval);
+      if (timerType === 'view') {
+        remainingTimeView = remainingTime;
+      } else if (timerType === 'floating') {
+        remainingTimeFloating = remainingTime;
+      }
     }
+  
+    if (timerType === 'view') {
+      isPausedView = !isPausedView;
+      togglePauseResumeButton('view');
+    } else if (timerType === 'floating') {
+      isPausedFloating = !isPausedFloating;
+      togglePauseResumeButton('floating');
+    }
+  }
+  
+  
+
+function togglePauseResumeButton(timerType) {
+  const iconPauseResume = document.getElementById('iconPauseResume');
+
+  if (timerType === 'view') {
+    if (isPausedView) {
+      iconPauseResume.classList.remove('bx-pause');
+      iconPauseResume.classList.add('bx-play');
+    } else {
+      iconPauseResume.classList.remove('bx-play');
+      iconPauseResume.classList.add('bx-pause');
+    }
+  } else if (timerType === 'floating') {
+    const iconPauseResumeFloating = document.getElementById('iconPauseResume-floating');
+    if (isPausedFloating) {
+      iconPauseResumeFloating.classList.remove('bx-pause');
+      iconPauseResumeFloating.classList.add('bx-play');
+    } else {
+      iconPauseResumeFloating.classList.remove('bx-play');
+      iconPauseResumeFloating.classList.add('bx-pause');
+    }
+  }
 }
 
-function timer(duration, display) {
-    let timer = duration;
-    let minutes, seconds;
-
-    interval = setInterval(() => {
-        minutes = Math.floor(timer / 60);
-        seconds = Math.floor(timer % 60);
-
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        display.classList.add('tempo');
-
-        display.innerHTML = `${minutes}:${seconds}`;
-
-        if (!isPaused) {
-            timer -= 1;
-        }
-
-        if (timer < 0) {
-            display.innerHTML = '00:00';
-            clearInterval(interval);
-            btnStart.disabled = false;
-        } else {
-            remainingTime = timer; 
-        }
-    }, 1000);
+function updateDisplay(display, minutes, seconds) {
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  display.innerHTML = `${minutes}:${seconds}`;
 }

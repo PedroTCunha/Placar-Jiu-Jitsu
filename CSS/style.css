@@ -101,3 +101,21 @@ h9{
     color: white;
 }
 
+
+.ftimer{
+    background-color: black;
+}
+
+
+
+  .fixed-left {
+    position: fixed;
+    left: 5px; /* Ajuste o valor conforme necessário */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px; /* Ajuste o valor conforme necessário */
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
